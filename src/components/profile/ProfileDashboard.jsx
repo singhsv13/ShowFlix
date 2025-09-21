@@ -1,7 +1,10 @@
 import React from "react";
-import Favourites from "../Favourites";
+import { Outlet } from "react-router";
+import useAuth from "../../hooks/useAuth"; // make sure this matches your export
 
-export default function ProfileDashboard({ user, favourites, onRemove }) {
+export default function ProfileDashboard() {
+  const { user } = useAuth(); // get the logged-in user from context
+
   return (
     <div className="space-y-10">
       {/* Dashboard Header */}
@@ -44,7 +47,7 @@ export default function ProfileDashboard({ user, favourites, onRemove }) {
       </div>
 
       {/* Favourites Section */}
-      <Favourites items={favourites} onRemove={onRemove} />
+      <Outlet />
     </div>
   );
 }

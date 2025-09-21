@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SearchBox from "./SearchBox";
 import MovieList from "../MovieList";
 import Pagination from "../shared/Pagination";
-import moviesData from "../../../public/movies.json";
+import moviesData from "../../data/movies.json";
 
 export default function SearchPage({ onAddToFavourites }) {
   const [query, setQuery] = useState("");

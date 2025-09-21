@@ -1,18 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router";
+import useAuth from "../../hooks/useAuth";
 import {
   FaFilm,
   FaHeart,
   FaSearch,
   FaInfoCircle,
   FaUserCircle,
-  FaListUl,
-  FaTv,
+  FaSignInAlt,
+  FaSignOutAlt,
 } from "react-icons/fa";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const { user, logout } = useAuth();
+
+  // 🔑 Ref for dropdown
+  const dropdownRef = useRef(null);
+
+  // 🔑 Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+    setIsOpen(false); // close dropdown on logout
+  };
+
+  const handleLinkClick = () => {
+    setIsOpen(false); // close dropdown after navigating
+  };
 
   return (
     <header className="bg-white shadow-md">
@@ -41,13 +67,6 @@ export default function Header() {
           </Link>
 
           <Link
-            to="/favourites"
-            className="flex items-center gap-2 hover:text-red-500 transition-colors"
-          >
-            <FaHeart /> Favourites
-          </Link>
-
-          <Link
             to="/search"
             className="flex items-center gap-2 hover:text-red-500 transition-colors"
           >
@@ -60,38 +79,49 @@ export default function Header() {
             <FaInfoCircle /> About
           </Link>
 
-          {/* Profile Dropdown */}
-          <div className="relative">
-            <div
-              className="w-9 h-9 bg-gray-200 rounded-full flex items-center justify-center hover:ring-2 hover:ring-red-400 cursor-pointer"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <FaUserCircle className="text-gray-600 text-lg" />
-            </div>
-
-            {isOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-50">
-                <Link
-                  to="/profile"
-                  className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >
-                  <FaUserCircle /> My Profile
-                </Link>
-                {/* <Link
-                  to="/profile/favourites"
-                  className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >
-                  <FaHeart /> My Favourites
-                </Link>
-                <Link
-                  to="/profile/shows"
-                  className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >
-                  <FaTv /> My Shows
-                </Link> */}
+          {/* Show Profile or Login depending on auth */}
+          {user ? (
+            <div className="relative" ref={dropdownRef}>
+              <div
+                className="w-9 h-9 bg-gray-200 rounded-full flex items-center justify-center hover:ring-2 hover:ring-red-400 cursor-pointer"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <FaUserCircle className="text-gray-600 text-lg" />
               </div>
-            )}
-          </div>
+
+              {isOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-50">
+                  <Link
+                    to="/profile"
+                    onClick={handleLinkClick}
+                    className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >
+                    <FaUserCircle /> My Profile
+                  </Link>
+                  <Link
+                    to="/profile/favourites"
+                    onClick={handleLinkClick}
+                    className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >
+                    <FaHeart /> My Favourites
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >
+                    <FaSignOutAlt /> Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="flex items-center gap-2 hover:text-red-500 transition-colors"
+            >
+              <FaSignInAlt /> Login
+            </Link>
+          )}
         </nav>
 
         {/* Mobile Menu Icon */}
@@ -139,28 +169,63 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white shadow-md">
           <nav className="flex flex-col space-y-2 px-4 py-3 text-gray-700">
-            <Link to="/all-shows" className="flex items-center gap-2 hover:text-red-500">
+            <Link
+              to="/all-shows"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center gap-2 hover:text-red-500"
+            >
               <FaFilm /> All Shows
             </Link>
-            <Link to="/favourites" className="flex items-center gap-2 hover:text-red-500">
-              <FaHeart /> Favourites
-            </Link>
-            <Link to="/search" className="flex items-center gap-2 hover:text-red-500">
+            <Link
+              to="/search"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center gap-2 hover:text-red-500"
+            >
               <FaSearch /> Search
             </Link>
-            <Link to="/about" className="flex items-center gap-2 hover:text-red-500">
+            <Link
+              to="/about"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center gap-2 hover:text-red-500"
+            >
               <FaInfoCircle /> About
             </Link>
             <hr />
-            <Link to="/profile" className="flex items-center gap-2 hover:text-red-500">
-              <FaUserCircle /> My Profile
-            </Link>
-            {/* <Link to="/profile/favourites" className="flex items-center gap-2 hover:text-red-500">
-              <FaHeart /> My Favourites
-            </Link>
-            <Link to="/profile/shows" className="flex items-center gap-2 hover:text-red-500">
-              <FaTv /> My Shows
-            </Link> */}
+            {user ? (
+              <>
+                <Link
+                  to="/profile"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 hover:text-red-500"
+                >
+                  <FaUserCircle /> My Profile
+                </Link>
+                <Link
+                  to="/profile/favourites"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 hover:text-red-500"
+                >
+                  <FaHeart /> My Favourites
+                </Link>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="flex items-center gap-2 text-left hover:text-red-500"
+                >
+                  <FaSignOutAlt /> Logout
+                </button>
+              </>
+            ) : (
+              <Link
+                to="/login"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center gap-2 hover:text-red-500"
+              >
+                <FaSignInAlt /> Login
+              </Link>
+            )}
           </nav>
         </div>
       )}
