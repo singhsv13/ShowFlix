@@ -18,7 +18,7 @@ export default function Favourites() {
         <div className="flex items-center justify-center gap-3 mb-6">
           <i className="fas fa-heart text-red-500 text-3xl"></i>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
-            My <span className="text-red-500">Favourites</span>
+            My <span className="bg-gradient-to-tr from-red-500 to-pink-500 text-white">Favourites</span>
           </h2>
         </div>
         <p className="text-gray-500 text-lg">No favourites yet ❤️</p>

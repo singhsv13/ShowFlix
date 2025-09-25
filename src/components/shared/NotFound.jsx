@@ -4,7 +4,7 @@ import { AlertTriangle } from "lucide-react"; // fun icon
 
 export default function NotFound() {
   return (
-    <section className="flex flex-col items-center justify-center text-center px-6 py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section className="flex flex-col items-center justify-center text-center px-6 py-15 relative overflow-hidden">
       {/* Visual/Icon */}
       <div className="mb-6 animate-bounce">
         <AlertTriangle className="w-20 h-20 text-red-500" />
@@ -27,7 +27,7 @@ export default function NotFound() {
       {/* CTA */}
       <Link
         to="/"
-        className="px-6 py-3 rounded-xl bg-red-500 text-white font-medium shadow hover:shadow-lg hover:bg-red-600 transition-all duration-300"
+        className="px-6 py-3 rounded-xl bg-gradient-to-r from-red-500 to-pink-500 text-white font-medium shadow hover:shadow-lg hover:bg-red-600 transition-all duration-300"
       >
         Back to Home
       </Link>

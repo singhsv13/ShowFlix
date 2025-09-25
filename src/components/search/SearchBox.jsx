@@ -39,12 +39,10 @@ export default function SearchBox({ onSearch }) {
         onSubmit={handleSubmit}
         className="flex items-center bg-white border border-gray-300 rounded-full shadow-md overflow-hidden focus-within:ring-2 focus-within:ring-red-500 transition-all"
       >
-        {/* Search Icon */}
         <span className="px-3 text-gray-400">
           <i className="fas fa-search"></i>
         </span>
 
-        {/* Input */}
         <input
           type="text"
           placeholder="Search for shows..."
@@ -67,7 +65,7 @@ export default function SearchBox({ onSearch }) {
         {/* Search button */}
         <button
           type="submit"
-          className="bg-red-500 text-white px-6 py-2 hover:bg-red-600 transition-colors rounded-r-full font-medium"
+          className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-2 hover:bg-red-600 transition-colors rounded-r-full font-medium"
         >
           <i className="fas fa-arrow-right"></i>
         </button>

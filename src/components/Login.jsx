@@ -31,15 +31,12 @@ export default function Login() {
 
   return (
       <div className="w-full max-w-md mx-auto bg-white shadow-xl rounded-2xl p-8 mt-10 relative">
-        {/* Decorative Accent */}
         <div className="absolute -top-6 -right-6 w-20 h-20 bg-red-100 rounded-full blur-2xl opacity-40"></div>
 
-        {/* Title */}
         <h1 className="text-4xl font-extrabold text-center mb-8 text-gray-800">
           <i className="fas fa-film text-red-500 mr-2"></i> Login
         </h1>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Email */}
           <div className="relative">
@@ -56,7 +53,6 @@ export default function Login() {
             />
           </div>
 
-          {/* Password */}
           <div className="relative">
             <span className="absolute inset-y-0 left-4 flex items-center text-red-400">
               <i className="fas fa-lock text-lg"></i>
@@ -71,10 +67,9 @@ export default function Login() {
             />
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-red-500 text-white py-3 rounded-full font-semibold shadow-md hover:bg-red-600 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+            className="w-full bg-gradient-to-r from-red-500 to-pink-500 text-white py-3 rounded-full font-semibold shadow-md hover:bg-red-600 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
           >
             <i className="fas fa-sign-in-alt mr-2"></i>
             Login
@@ -87,7 +82,7 @@ export default function Login() {
             Don’t have an account?{" "}
             <a
               href="#"
-              className="text-red-500 font-medium hover:underline transition-colors"
+              className="bg-gradient-to-r from-red-500 to-pink-500 text-transparent bg-clip-text font-medium hover:underline transition-colors"
             >
               <i className="fas fa-user-plus mr-1"></i> Sign Up
             </a>
