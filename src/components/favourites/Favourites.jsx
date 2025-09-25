@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-import MovieList from "./MovieList";
-import Pagination from "./shared/Pagination";
+import MovieList from "../movies/MovieList";
+import Pagination from "../shared/Pagination";
+import { useFavourites } from "../../hooks/useFavourites";
 
-export default function Favourites({ items, onRemove }) {
+export default function Favourites() {
+  const { favourites, removeFavourite } = useFavourites();
   const [currentPage, setCurrentPage] = useState(1);
-  const moviesPerPage = 12; // you can tweak this
+  const moviesPerPage = 14;
 
-  if (!items || items.length === 0) {
+  const handleRemoveFav = (id) => {
+  removeFavourite({ type: "remove", id });
+};
+
+  if (!favourites || favourites.length === 0) {
     return (
       <section className="w-full px-4 sm:px-6 lg:px-8 py-12 text-center">
         <div className="flex items-center justify-center gap-3 mb-6">
@@ -23,10 +29,9 @@ export default function Favourites({ items, onRemove }) {
     );
   }
 
-  // Pagination logic
   const indexOfLast = currentPage * moviesPerPage;
   const indexOfFirst = indexOfLast - moviesPerPage;
-  const currentItems = items.slice(indexOfFirst, indexOfLast);
+  const currentMovies = favourites.slice(indexOfFirst, indexOfLast);
 
   return (
     <section className="w-full px-4 sm:px-6 lg:px-8 py-12">
@@ -34,22 +39,22 @@ export default function Favourites({ items, onRemove }) {
       <div className="flex items-center justify-center gap-3 mb-6">
         <i className="fas fa-heart text-red-500 text-3xl"></i>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 text-center">
-          My <span className="text-red-500">Favourites</span>
+          My <span className="bg-gradient-to-r from-red-500 to-pink-500 text-transparent bg-clip-text">Favourites</span>
         </h2>
       </div>
       <p className="mt-2 text-gray-500 text-center max-w-xl mx-auto">
-        Your hand-picked collection of movies and shows — ready to rewatch anytime.
+        Your hand-picked collection of movies and shows — ready to rewatch
+        anytime.
       </p>
 
       {/* Movie list */}
-      <MovieList items={currentItems} onRemove={onRemove} />
+      <MovieList items={currentMovies} onRemove={handleRemoveFav} />
 
       {/* Pagination */}
       <div className="mt-10 flex justify-center">
         <Pagination
           currentPage={currentPage}
-          totalItems={items.length}
-          itemsPerPage={moviesPerPage}
+          totalPages={Math.ceil(favourites.length / moviesPerPage)}
           onPageChange={setCurrentPage}
         />
       </div>

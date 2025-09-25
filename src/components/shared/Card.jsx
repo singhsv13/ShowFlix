@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useFavourites } from "../../hooks/useFavourites";
+import { AuthContext } from "../../context/authcontext";
 
 export default function Card({ 
+  id,
   name, 
   description, 
   poster, 
   rating, 
   genre, 
   year,
-  onAddToFav,     // optional
-  onRemoveFromFav // optional
+  isFavPage 
 }) {
+  const { favourites, dispatch } = useFavourites();
+  const {user} = useContext(AuthContext);
+
+  // Check if this movie is already in favourites
+  const isFav = favourites.some((m) => m.id === id);
+
+  const handleFavClick = () => {
+    if (isFav) {
+      dispatch({ type: "remove", id });
+    } else {
+      dispatch({ 
+        type: "add", 
+        movie: { id, name, description, poster, rating, genre, year } 
+      });
+    }
+  };
+
   return (
     <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition transform hover:-translate-y-1 overflow-hidden group relative">
       {/* Poster */}
@@ -24,32 +43,26 @@ export default function Card({
           ⭐ {rating}
         </div>
 
-        {/* Action buttons */}
-        <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition">
-          {/* Add to Favourites */}
-          {onAddToFav && (
+        {/* Favourite toggle button — only show if logged in */}
+        {user && (
+          <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition flex flex-col gap-2">
             <button
-              onClick={onAddToFav}
-              className="bg-white/90 backdrop-blur-sm rounded-full p-2 shadow 
-                         text-gray-600 hover:text-red-500 hover:scale-110 transition"
-              title="Add to Favourites"
+              onClick={handleFavClick}
+              className={`bg-white/90 backdrop-blur-sm rounded-full p-2 shadow 
+                          text-gray-600 hover:scale-110 transition
+                          ${isFav || isFavPage ? "hover:text-red-500" : "hover:text-green-500"}`}
+              title={
+                isFavPage 
+                  ? "Remove from Favourites" 
+                  : isFav 
+                    ? "Remove from Favourites" 
+                    : "Add to Favourites"
+              }
             >
-              <i className="fas fa-heart"></i>
+              <i className={`fas ${isFav || isFavPage ? "fa-times" : "fa-heart"}`}></i>
             </button>
-          )}
-
-          {/* Remove from Favourites */}
-          {onRemoveFromFav && (
-            <button
-              onClick={onRemoveFromFav}
-              className="bg-white/90 backdrop-blur-sm rounded-full p-2 shadow 
-                         text-gray-600 hover:text-red-500 hover:scale-110 transition"
-              title="Remove from Favourites"
-            >
-              <i className="fas fa-times"></i>
-            </button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
       {/* Content */}

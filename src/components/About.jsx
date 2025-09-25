@@ -8,7 +8,7 @@ export default function About() {
         <div className="flex items-center justify-center gap-3 mb-6">
           <i className="fas fa-info-circle text-red-500 text-3xl"></i>
           <h2 className="text-4xl sm:text-4xl font-extrabold text-gray-900">
-            About <span className="text-red-500">ShowFlix</span>
+            About <span className="bg-gradient-to-r from-red-500 to-pink-500 text-transparent bg-clip-text">ShowFlix</span>
           </h2>
         </div>
 

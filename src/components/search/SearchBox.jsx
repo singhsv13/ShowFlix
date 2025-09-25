@@ -24,8 +24,7 @@ export default function SearchBox({ onSearch }) {
     e.preventDefault();
     if (query.trim()) {
       onSearch(query);
-      // setLastSearch(query);
-      setQuery(""); // clear input
+      setQuery(""); 
     }
   };
 

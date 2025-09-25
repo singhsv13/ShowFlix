@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SearchBox from "./SearchBox";
-import MovieList from "../MovieList";
+import MovieList from "../movies/MovieList";
 import Pagination from "../shared/Pagination";
 import moviesData from "../../data/movies.json";
 
@@ -39,7 +39,7 @@ export default function SearchPage({ onAddToFavourites }) {
         <div className="flex items-center justify-center gap-3 mb-4">
           <i className="fas fa-search text-red-500 text-3xl"></i>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
-            Search <span className="text-red-500">Movies</span>
+            Search <span className="bg-gradient-to-r from-red-500 to-pink-500 text-transparent bg-clip-text">Movies</span>
           </h1>
         </div>
         <p className="mt-2 text-gray-500 max-w-2xl mx-auto text-base sm:text-lg">

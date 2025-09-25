@@ -2,10 +2,10 @@ import { Routes, Route, Navigate } from "react-router";
 import Home from "../Home";
 import About from "../About";
 import NotFound from "./NotFound";
-import Favourites from "../Favourites";
+import Favourites from "../favourites/Favourites";
 import SearchPage from "../search/SearchPage";
 import ProfileDashboard from "../profile/ProfileDashboard";
-import MoviesPage from "../MoviePage";
+import MoviesPage from "../movies/MoviePage";
 import Login from "../Login";
 import ProtectedRoutes from "./ProtectedRoutes";
 

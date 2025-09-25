@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import {
   FaFilm,
@@ -14,13 +14,12 @@ import {
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const { user, logout } = useAuth();
 
-  // 🔑 Ref for dropdown
   const dropdownRef = useRef(null);
 
-  // 🔑 Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -33,11 +32,13 @@ export default function Header() {
 
   const handleLogout = () => {
     logout();
-    setIsOpen(false); // close dropdown on logout
+    setIsOpen(false); 
+    navigate('/home');
+    alert(`Take Care, ${user.name}!`);
   };
 
   const handleLinkClick = () => {
-    setIsOpen(false); // close dropdown after navigating
+    setIsOpen(false); 
   };
 
   return (
@@ -51,7 +52,7 @@ export default function Header() {
             className="h-8 w-8 md:h-10 md:w-10 object-contain"
           />
           <Link to="/home">
-            <span className="hidden md:inline text-2xl font-bold text-red-500 tracking-wide">
+            <span className="hidden md:inline text-2xl font-bold bg-gradient-to-r from-red-500 to-pink-500 text-transparent bg-clip-text tracking-wide">
               ShowFlix
             </span>
           </Link>
@@ -98,13 +99,13 @@ export default function Header() {
                   >
                     <FaUserCircle /> My Profile
                   </Link>
-                  <Link
+                  {/* <Link
                     to="/profile/favourites"
                     onClick={handleLinkClick}
                     className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100"
                   >
                     <FaHeart /> My Favourites
-                  </Link>
+                  </Link> */}
                   <button
                     onClick={handleLogout}
                     className="w-full text-left flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100"

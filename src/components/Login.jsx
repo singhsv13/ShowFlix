@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import users from "../data/users.json";
-import useAuth from "../hooks/useAuth"; 
+import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth(); 
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -19,7 +19,7 @@ export default function Login() {
     );
 
     if (foundUser) {
-      login(foundUser); 
+      login(foundUser);
       setEmail("");
       setPassword("");
       navigate("/all-shows");
@@ -30,64 +30,69 @@ export default function Login() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto bg-white shadow-lg rounded-2xl p-8 mt-5">
-      <h1 className="text-3xl font-bold text-center mb-6 text-red-500">
-        Login
-      </h1>
+      <div className="w-full max-w-md mx-auto bg-white shadow-xl rounded-2xl p-8 mt-10 relative">
+        {/* Decorative Accent */}
+        <div className="absolute -top-6 -right-6 w-20 h-20 bg-red-100 rounded-full blur-2xl opacity-40"></div>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
-        {/* Email */}
-        <div className="relative">
-          <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
-            <i className="fas fa-envelope"></i>
-          </span>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 rounded-full border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-500 outline-none transition-all"
-            required
-          />
-        </div>
+        {/* Title */}
+        <h1 className="text-4xl font-extrabold text-center mb-8 text-gray-800">
+          <i className="fas fa-film text-red-500 mr-2"></i> Login
+        </h1>
 
-        {/* Password */}
-        <div className="relative">
-          <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
-            <i className="fas fa-lock"></i>
-          </span>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 rounded-full border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-500 outline-none transition-all"
-            required
-          />
-        </div>
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Email */}
+          <div className="relative">
+            <span className="absolute inset-y-0 left-4 flex items-center text-red-400">
+              <i className="fas fa-envelope text-lg"></i>
+            </span>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full pl-12 pr-4 py-3 rounded-full border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-400 outline-none transition-all"
+              required
+            />
+          </div>
 
-        {/* Submit */}
-        <button
-          type="submit"
-          className="w-full bg-red-500 text-white py-3 rounded-full font-semibold hover:bg-red-600 transition-colors shadow-md"
-        >
-          <i className="fas fa-sign-in-alt mr-2"></i>
-          Login
-        </button>
-      </form>
+          {/* Password */}
+          <div className="relative">
+            <span className="absolute inset-y-0 left-4 flex items-center text-red-400">
+              <i className="fas fa-lock text-lg"></i>
+            </span>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full pl-12 pr-4 py-3 rounded-full border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-400 outline-none transition-all"
+              required
+            />
+          </div>
 
-      {/* Sign up link */}
-      <div className="mt-6 text-center text-sm text-gray-600">
-        <p>
-          Don’t have an account?{" "}
-          <a
-            href="#"
-            className="text-red-500 font-medium hover:underline transition-colors"
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-red-500 text-white py-3 rounded-full font-semibold shadow-md hover:bg-red-600 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
           >
-            Sign Up
-          </a>
-        </p>
+            <i className="fas fa-sign-in-alt mr-2"></i>
+            Login
+          </button>
+        </form>
+
+        {/* Sign up link */}
+        <div className="mt-8 text-center text-sm text-gray-600">
+          <p>
+            Don’t have an account?{" "}
+            <a
+              href="#"
+              className="text-red-500 font-medium hover:underline transition-colors"
+            >
+              <i className="fas fa-user-plus mr-1"></i> Sign Up
+            </a>
+          </p>
+        </div>
       </div>
-    </div>
   );
 }
