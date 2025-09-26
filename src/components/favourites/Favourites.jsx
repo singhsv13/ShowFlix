@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import MovieList from "../movies/MovieList";
 import Pagination from "../shared/Pagination";
 import { useFavourites } from "../../hooks/useFavourites";
+import PageHeading from "../shared/PageHeading";
 
 export default function Favourites() {
   const { favourites, removeFavourite } = useFavourites();
@@ -39,15 +40,12 @@ export default function Favourites() {
   return (
     <section className="w-full px-4 sm:px-6 lg:px-8 py-12">
       {/* Heading */}
-      <div className="flex items-center justify-center gap-3 mb-6">
-        <i className="fas fa-heart text-red-500 text-3xl"></i>
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-white text-center">
-          My{" "}
-          <span className="bg-gradient-to-r from-red-500 to-pink-500 text-transparent bg-clip-text">
-            Favourites
-          </span>
-        </h2>
-      </div>
+      <PageHeading
+        icon="fa-heart"
+        iconColor="text-red-500"
+        title="My"
+        highlight="Favourites"
+      />
       <p className="mt-2 text-gray-300 text-center max-w-xl mx-auto">
         Your hand-picked collection of movies and shows — ready to rewatch
         anytime.

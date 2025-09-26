@@ -10,6 +10,7 @@ import {
   FaSignInAlt,
   FaSignOutAlt,
 } from "react-icons/fa";
+import NavItem from "./NavItem";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,25 +59,9 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8 items-center text-white">
-          <Link
-            to="/all-shows"
-            className="flex items-center gap-2 hover:text-red-400 transition-colors"
-          >
-            <FaFilm /> All Shows
-          </Link>
-
-          <Link
-            to="/search"
-            className="flex items-center gap-2 hover:text-red-400 transition-colors"
-          >
-            <FaSearch /> Search
-          </Link>
-          <Link
-            to="/about"
-            className="flex items-center gap-2 hover:text-red-400 transition-colors"
-          >
-            <FaInfoCircle /> About
-          </Link>
+          <NavItem to="/all-shows" icon={FaFilm} label="All Shows" />
+          <NavItem to="/search" icon={FaSearch} label="Search" />
+          <NavItem to="/about" icon={FaInfoCircle} label="About" />
 
           {/* Auth */}
           {user ? (
@@ -107,12 +92,7 @@ export default function Header() {
               )}
             </div>
           ) : (
-            <Link
-              to="/login"
-              className="flex items-center gap-2 hover:text-red-400 transition-colors"
-            >
-              <FaSignInAlt /> Login
-            </Link>
+            <NavItem to="/login" icon={FaSignInAlt} label="Login"/>
           )}
         </nav>
 
@@ -130,7 +110,12 @@ export default function Header() {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             ) : (
               <svg
@@ -140,7 +125,12 @@ export default function Header() {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             )}
           </button>
