@@ -33,7 +33,7 @@ export default function Login() {
     <div className="flex items-center justify-center px-4 mt-24">
       {/* Login Card */}
       <div className="w-full max-w-md bg-white/10 backdrop-blur-xl shadow-2xl rounded-3xl p-10 border border-white/20 relative">
-        <h1 className="text-4xl font-extrabold text-center mb-8 text-white flex items-center justify-center gap-2">
+        <h1 className="text-3xl font-extrabold text-center mb-8 text-white flex items-center justify-center gap-2">
           <i className="fas fa-film text-red-400"></i>
           Login
         </h1>

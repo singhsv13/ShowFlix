@@ -14,7 +14,7 @@ export default function About() {
         {/* Heading */}
         <div className="flex items-center justify-center gap-3 mb-6 relative z-10">
           <i className="fas fa-info-circle text-red-500 text-3xl"></i>
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-white">
+          <h2 className="text-4xl sm:text-4xl font-extrabold text-white">
             About{" "}
             <span className="bg-gradient-to-r from-red-500 to-pink-500 text-transparent bg-clip-text">
               ShowFlix

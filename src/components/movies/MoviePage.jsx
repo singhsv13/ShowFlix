@@ -44,7 +44,7 @@ export default function MoviesPage() {
   };
 
   return (
-    <section className="w-full py-12 px-4 sm:px-6 lg:px-8">
+    <section className="w-full py-10 px-4 sm:px-6 lg:px-8">
       {/* Main heading */}
       <PageHeading
         icon="fa-star"

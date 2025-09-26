@@ -7,9 +7,9 @@ export default function PageHeading({
   highlight 
 }) {
   return (
-    <div className="flex items-center justify-center gap-3 mb-6">
+    <div className="flex items-center justify-center gap-3 my-8">
       {/* Icon */}
-      <i className={`fas ${icon} ${iconColor} text-3xl`}></i>
+      <i className={`fas ${icon} ${iconColor} text-2xl`}></i>
 
       {/* Title */}
       <h2 className="text-3xl sm:text-4xl font-extrabold text-white text-center">
