@@ -8,7 +8,7 @@ export default function SearchPage({ onAddToFavourites }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 14; // adjust based on your grid
+  const itemsPerPage = 12; 
 
   // Filter movies based on query
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function SearchPage({ onAddToFavourites }) {
       movie.name.toLowerCase().includes(query.toLowerCase())
     );
     setResults(filtered);
-    setCurrentPage(1); // reset to first page on new search
+    setCurrentPage(1); 
   }, [query]);
 
   // Pagination calculations
@@ -38,11 +38,14 @@ export default function SearchPage({ onAddToFavourites }) {
       <div className="text-center mb-10">
         <div className="flex items-center justify-center gap-3 mb-4">
           <i className="fas fa-search text-red-500 text-3xl"></i>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
-            Search <span className="bg-gradient-to-r from-red-500 to-pink-500 text-transparent bg-clip-text">Movies</span>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-white">
+            Search{" "}
+            <span className="bg-gradient-to-r from-red-500 to-pink-500 text-transparent bg-clip-text">
+              Movies
+            </span>
           </h1>
         </div>
-        <p className="mt-2 text-gray-500 max-w-2xl mx-auto text-base sm:text-lg">
+        <p className="mt-2 text-gray-300 max-w-2xl mx-auto text-base sm:text-lg">
           Find trending movies, hidden gems, and your all-time favourites.
         </p>
       </div>
@@ -54,7 +57,7 @@ export default function SearchPage({ onAddToFavourites }) {
       {query && results.length > 0 && (
         <div className="mt-12 flex items-center justify-center gap-3 mb-6">
           <i className="fas fa-film text-yellow-400 text-2xl"></i>
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white text-center">
             Search Results for "<span className="text-red-500">{query}</span>"
           </h2>
         </div>
@@ -62,13 +65,15 @@ export default function SearchPage({ onAddToFavourites }) {
 
       {/* No results message */}
       {query && results.length === 0 && (
-        <p className="text-center text-gray-500 mt-6 text-lg">
+        <p className="text-center text-gray-300 mt-6 text-lg">
           No results found for "<span className="text-red-500">{query}</span>" 😔
         </p>
       )}
 
       {/* Movie List */}
-      <MovieList items={paginatedResults} onAddToFav={onAddToFavourites} />
+      <div className=" rounded-3xl p-4 shadow-2xl">
+        <MovieList items={paginatedResults} onAddToFav={onAddToFavourites} />
+      </div>
 
       {/* Pagination */}
       {results.length > itemsPerPage && (

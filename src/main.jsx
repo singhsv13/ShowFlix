@@ -6,13 +6,16 @@ import { FavouritesProvider } from "./components/favourites/FavProvider.jsx";
 import App from "./App.jsx";
 
 import "./index.css";
+import AppBackground from "./components/shared/AppBackground.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
       <FavouritesProvider>
         <BrowserRouter>
-          <App />
+          <AppBackground>
+            <App />
+          </AppBackground>
         </BrowserRouter>
       </FavouritesProvider>
     </AuthProvider>

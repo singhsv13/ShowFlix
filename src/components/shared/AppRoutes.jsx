@@ -10,27 +10,27 @@ import Login from "../Login";
 import ProtectedRoutes from "./ProtectedRoutes";
 
 export default function AppRoutes() {
-	return (
-		<>
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/home" element={<Navigate to="/" />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/about" element={<About />} />
-				<Route path="/search" element={<SearchPage />} />
-				<Route path="/all-shows" element={<MoviesPage />} />
-				<Route
-					path="/profile"
-					element={
-						<ProtectedRoutes>
-							<ProfileDashboard />
-						</ProtectedRoutes>
-					}
-				>
-					<Route path="favourites" element={<Favourites />} />
-				</Route>
-				<Route path="*" element={<NotFound />} />
-			</Routes>
-		</>
-	);
+  return (
+    <>
+      <Routes>  
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Navigate to="/" />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/all-shows" element={<MoviesPage />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoutes>
+                <ProfileDashboard />
+              </ProtectedRoutes>
+            }
+          >
+            <Route path="favourites" element={<Favourites />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
+  );
 }

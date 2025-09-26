@@ -10,8 +10,8 @@ function App() {
     <div className="flex flex-col min-h-screen">
       <Header />
 
-      <main className="flex-grow">
-        <div className="container mx-auto p-4">
+      <main className="flex-grow overflow-x-hidden">
+        <div className="mx-auto p-4 mt-4 max-w-screen-xl">
           <AppRoutes>
             <Outlet />
           </AppRoutes>

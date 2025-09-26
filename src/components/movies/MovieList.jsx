@@ -3,7 +3,7 @@ import Card from "../shared/Card";
 
 export default function MovieList({ items, onAddToFav, onRemove }) {
   return (
-    <div className="mt-8 grid gap-6 grid-cols-2 sm:grid-cols-4 lg:grid-cols-7">
+    <div className="mt-8 grid gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
       {items.map((item) => (
         <Card
           key={item.id}
