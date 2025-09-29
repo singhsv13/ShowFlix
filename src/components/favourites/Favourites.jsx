@@ -5,12 +5,12 @@ import { useFavourites } from "../../hooks/useFavourites";
 import PageHeading from "../shared/PageHeading";
 
 export default function Favourites() {
-  const { favourites, removeFavourite } = useFavourites();
+  const { favourites, removeFavourite } = useFavourites(); 
   const [currentPage, setCurrentPage] = useState(1);
   const moviesPerPage = 14;
 
   const handleRemoveFav = (id) => {
-    removeFavourite({ type: "remove", id });
+    removeFavourite(id);
   };
 
   if (!favourites || favourites.length === 0) {

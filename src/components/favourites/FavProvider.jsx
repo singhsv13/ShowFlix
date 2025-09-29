@@ -1,15 +1,18 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState, useContext } from "react";
 import { FavouritesContext } from "../../context/FavContext";
+import { AuthContext } from "../../context/authcontext";
 
 function favReducer(state, action) {
   switch (action.type) {
     case "add":
-      if (state.some((m) => m.id === action.movie.id)) 
-        return state;
+      if (state.some((m) => m.id === action.movie.id)) return state;
       return [...state, action.movie];
 
     case "remove":
       return state.filter((fav) => fav.id !== action.id);
+
+    case "set": // 🔹 new action to replace entire state when user changes
+      return action.favourites || [];
 
     default:
       return state;
@@ -17,21 +20,27 @@ function favReducer(state, action) {
 }
 
 export function FavouritesProvider({ children }) {
-  // Load from localStorage
-  const initialFavs = () => {
-    const saved = localStorage.getItem("favourites");
-    return saved ? JSON.parse(saved) : [];
-  };
+  const { user } = useContext(AuthContext);
+  const [favourites, dispatch] = useReducer(favReducer, []);
 
-  const [favourites, dispatch] = useReducer(favReducer, [], initialFavs);
+  const storageKey = `favourites_${user?.id || "guest"}`;
 
-  // Persist to localStorage whenever favourites change
   useEffect(() => {
-    localStorage.setItem("favourites", JSON.stringify(favourites));
-  }, [favourites]);
+    const saved = localStorage.getItem(storageKey);
+    dispatch({ type: "set", favourites: saved ? JSON.parse(saved) : [] });
+  }, [user]);
+
+  useEffect(() => {
+    localStorage.setItem(storageKey, JSON.stringify(favourites));
+  }, [favourites, storageKey]);
+
+  const addFavourite = (movie) => dispatch({ type: "add", movie });
+  const removeFavourite = (id) => dispatch({ type: "remove", id });
 
   return (
-    <FavouritesContext.Provider value={{ favourites, dispatch }}>
+    <FavouritesContext.Provider
+      value={{ favourites, dispatch, addFavourite, removeFavourite }}
+    >
       {children}
     </FavouritesContext.Provider>
   );

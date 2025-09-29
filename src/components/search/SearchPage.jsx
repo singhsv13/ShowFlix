@@ -51,22 +51,43 @@ export default function SearchPage({ onAddToFavourites }) {
       {/* Search Box */}
       <SearchBox onSearch={(q) => setQuery(q)} />
 
-      {/* Results heading */}
       {query && results.length > 0 && (
-        <div className="mt-12 flex items-center justify-center gap-3 mb-6">
-          <i className="fas fa-film text-yellow-400 text-2xl"></i>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white text-center">
-            Search Results for "<span className="text-red-500">{query}</span>"
-          </h2>
+        <div className="mt-12 mb-6 text-center">
+          {/* Top line with icons */}
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <i className="fas fa-search text-blue-400 text-xl sm:text-2xl"></i>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">
+              Results for{" "}
+              <span className="bg-gradient-to-r from-red-500 to-pink-500 text-transparent bg-clip-text">
+                "{query}"
+              </span>
+            </h2>
+            <i className="fas fa-clapperboard text-yellow-300 text-xl sm:text-2xl"></i>
+          </div>
+
+          {/* Sub line with result count */}
+          <p className="text-sm sm:text-base text-gray-300 flex items-center justify-center gap-2">
+            <i className="fas fa-list-ol text-green-400"></i>
+            <span>
+              {results.length} result{results.length > 1 ? "s" : ""} found
+            </span>
+          </p>
         </div>
       )}
 
       {/* No results message */}
       {query && results.length === 0 && (
-        <p className="text-center text-gray-300 mt-6 text-lg">
-          No results found for "<span className="text-red-500">{query}</span>"
-          😔
-        </p>
+        <div className="text-center mt-10">
+          <i className="fas fa-sad-tear text-red-400 text-4xl mb-3"></i>
+          <p className="text-lg sm:text-xl text-gray-300">
+            No results found for{" "}
+            <span className="bg-gradient-to-r from-red-500 to-pink-500 text-transparent bg-clip-text font-semibold">"{query}"</span>
+          </p>
+          <p className="text-sm text-gray-400 mt-2 flex items-center justify-center gap-2">
+            <i className="fas fa-film text-yellow-400"></i>
+            Try searching with a different title
+          </p>
+        </div>
       )}
 
       {/* Movie List */}

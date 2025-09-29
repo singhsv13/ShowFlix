@@ -12,7 +12,7 @@ export default function MoviesPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const moviesPerPage = 12;
 
-  const { favourites, dispatch } = useFavourites();
+  const { favourites, addFavourite } = useFavourites(); // ✅ use helper, not dispatch
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function MoviesPage() {
       alert("You must be logged in to add favourites ❤️");
       return;
     }
-    dispatch({ type: "add", movie });
+    addFavourite(movie); // ✅ clean call
   };
 
   return (
