@@ -5,26 +5,22 @@ import moviesData from "../../data/movies.json";
 import { useFavourites } from "../../hooks/useFavourites";
 import { AuthContext } from "../../context/authcontext";
 import PageHeading from "../shared/PageHeading";
+import Loader from "../shared/Loader";
+import { useLoader } from "../../hooks/useLoader";
 
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const moviesPerPage = 12;
+  const loading = useLoader(movies);
 
-  const { favourites, addFavourite } = useFavourites(); // ✅ use helper, not dispatch
+  const { favourites, addFavourite } = useFavourites();
   const { user } = useContext(AuthContext);
 
+  // initial loading of data in the component
   useEffect(() => {
-    setMovies(moviesData);
-    setLoading(false);
+      setMovies(moviesData);
   }, []);
-
-  if (loading) {
-    return (
-      <p className="text-center mt-10 text-gray-300">Loading movies... 🍿</p>
-    );
-  }
 
   // Filter out movies already in favourites
   const availableMovies = movies.filter(
@@ -40,7 +36,7 @@ export default function MoviesPage() {
       alert("You must be logged in to add favourites ❤️");
       return;
     }
-    addFavourite(movie); // ✅ clean call
+    addFavourite(movie);
   };
 
   return (
@@ -51,15 +47,15 @@ export default function MoviesPage() {
         iconColor="text-yellow-400"
         title="ShowFlix"
         highlight="Spotlight"
+        description="Discover trending movies, explore hidden gems, and find your next
+        favorite."
       />
 
-      <p className="mt-2 text-gray-300 text-center max-w-2xl mx-auto">
-        Discover trending movies, explore hidden gems, and find your next
-        favorite.
-      </p>
-
-      {/* Empty state */}
-      {currentMovies.length === 0 ? (
+      {loading ? (
+        // Show loader ONLY while fetching
+        <Loader />
+      ) : currentMovies.length === 0 ? (
+        // Empty state
         <p className="text-center text-gray-400 py-16 text-lg">
           No movies to show right now 🎬
         </p>

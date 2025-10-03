@@ -2,66 +2,65 @@ import React, { useState } from "react";
 import MovieList from "../movies/MovieList";
 import Pagination from "../shared/Pagination";
 import { useFavourites } from "../../hooks/useFavourites";
+import { useLoader } from "../../hooks/useLoader";
 import PageHeading from "../shared/PageHeading";
+import Loader from "../shared/Loader";
 
 export default function Favourites() {
-  const { favourites, removeFavourite } = useFavourites(); 
+  const { favourites, removeFavourite } = useFavourites();
   const [currentPage, setCurrentPage] = useState(1);
+  const loading = useLoader(favourites);
+
   const moviesPerPage = 14;
 
   const handleRemoveFav = (id) => {
     removeFavourite(id);
   };
 
-  if (!favourites || favourites.length === 0) {
-    return (
-      <section className="w-full px-4 sm:px-6 lg:px-8 py-12 text-center">
-        <div className="flex items-center justify-center gap-3 mb-6">
-          <i className="fas fa-heart text-red-500 text-3xl"></i>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
-            My{" "}
-            <span className="bg-gradient-to-tr from-red-500 to-pink-500 text-transparent bg-clip-text">
-              Favourites
-            </span>
-          </h2>
-        </div>
-        <p className="text-gray-300 text-lg">No favourites yet ❤️</p>
-        <p className="mt-2 text-gray-400 text-sm">
-          Save movies you love, and they’ll show up here.
-        </p>
-      </section>
-    );
-  }
-
   const indexOfLast = currentPage * moviesPerPage;
   const indexOfFirst = indexOfLast - moviesPerPage;
   const currentMovies = favourites.slice(indexOfFirst, indexOfLast);
 
   return (
-    <section className="w-full px-4 sm:px-6 lg:px-8 py-12">
+    <section className="w-full px-4 sm:px-6 lg:px-8 py-8">
       {/* Heading */}
       <PageHeading
         icon="fa-heart"
         iconColor="text-red-500"
         title="My"
         highlight="Favourites"
+        description="Your hand-picked collection of movies and shows — ready to rewatch
+        anytime."
       />
-      <p className="mt-2 text-gray-300 text-center max-w-xl mx-auto">
-        Your hand-picked collection of movies and shows — ready to rewatch
-        anytime.
-      </p>
 
-      {/* Movie list */}
-      <MovieList items={currentMovies} onRemove={handleRemoveFav} />
+      {/* Loader + Favourites section */}
+      {loading ? (
+        <Loader />
+      ) : !favourites || favourites.length === 0 ? (
+        // Empty state
+        <div className="flex flex-col items-center gap-4 mt-12">
+          <i className="fas fa-film text-yellow-400 text-5xl sm:text-6xl"></i>
+          <p className="text-gray-300 text-lg sm:text-xl">No favourites yet</p>
+          <p className="text-gray-400 text-sm max-w-md text-center">
+            Save movies you love, and they’ll show up here. Click the{" "}
+            <i className="fas fa-heart text-red-500"></i> icon on any movie to
+            add it to your favourites.
+          </p>
+        </div>
+      ) : (
+        // Movie list + Pagination
+        <>
+          <MovieList items={currentMovies} onRemove={handleRemoveFav} />
 
-      {/* Pagination */}
-      <div className="mt-10 flex justify-center">
-        <Pagination
-          currentPage={currentPage}
-          totalPages={Math.ceil(favourites.length / moviesPerPage)}
-          onPageChange={setCurrentPage}
-        />
-      </div>
+          <div className="mt-10 flex justify-center">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={Math.ceil(favourites.length / moviesPerPage)}
+              onPageChange={setCurrentPage}
+            />
+          </div>
+        </>
+      )}
     </section>
   );
 }
