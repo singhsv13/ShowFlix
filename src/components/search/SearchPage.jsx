@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import SearchBox from "./SearchBox";
-import MovieList from "../movies/MovieList";
-import Pagination from "../shared/Pagination";
+import SearchBox from "./searchbox";
+import MovieList from "../movies/movielist";
+import Pagination from "../shared/pagination";
 import moviesData from "../../data/movies.json";
-import PageHeading from "../shared/PageHeading";
-import Loader from "../shared/Loader";
+import PageHeading from "../shared/pageheading";
+import Loader from "../shared/loader";
 import { useLoader } from "../../hooks/useLoader";
 
 export default function SearchPage({ onAddToFavourites }) {

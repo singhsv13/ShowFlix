@@ -1,8 +1,8 @@
 import React from "react";
 import { Outlet } from "react-router";
 import useAuth from "../../hooks/useAuth";
-import Favourites from "../favourites/Favourites";
-import PageHeading from "../shared/PageHeading";
+import Favourites from "../favourites/favourites";
+import PageHeading from "../shared/pageheading";
 
 export default function ProfileDashboard() {
 	const { user } = useAuth();

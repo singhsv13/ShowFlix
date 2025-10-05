@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import MovieList from "../movies/MovieList";
-import Pagination from "../shared/Pagination";
+import MovieList from "../movies/movielist";
+import Pagination from "../shared/pagination";
 import { useFavourites } from "../../hooks/useFavourites";
 import { useLoader } from "../../hooks/useLoader";
-import PageHeading from "../shared/PageHeading";
-import Loader from "../shared/Loader";
+import PageHeading from "../shared/pageheading";
+import Loader from "../shared/loader";
 
 export default function Favourites() {
   const { favourites, removeFavourite } = useFavourites();

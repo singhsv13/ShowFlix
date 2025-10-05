@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../shared/Card";
+import Card from "../shared/card";
 
 export default function MovieList({ items, onAddToFav, onRemove }) {
   return (

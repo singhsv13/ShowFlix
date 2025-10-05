@@ -1,5 +1,5 @@
-import { useEffect, useReducer, useState, useContext } from "react";
-import { FavouritesContext } from "../../context/FavContext";
+import { useEffect, useReducer, useContext } from "react";
+import { FavouritesContext } from "../../context/favcontext";
 import { AuthContext } from "../../context/authcontext";
 
 function favReducer(state, action) {
