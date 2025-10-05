@@ -8,7 +8,7 @@ export default function ProfileDashboard() {
 	const { user } = useAuth();
 
 	return (
-		<div className="space-y-12">
+		<div className="space-y-8">
 			{/* Dashboard Header */}
 			<section className="w-full px-4 sm:px-6 lg:px-8 py-12">
 				<PageHeading
@@ -55,8 +55,7 @@ export default function ProfileDashboard() {
 			</div>
 
 			{/* Favourites Section */}
-			<div className="mt-10">
-				{/* <Outlet /> */}
+			<div className="mt-8">
 				<Favourites />
 			</div>
 		</div>
