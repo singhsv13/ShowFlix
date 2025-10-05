@@ -1,6 +1,6 @@
-import Header from "./components/shared/Header";
-import Footer from "./components/shared/Footer";
-import AppRoutes from "./components/shared/AppRoutes";
+import Header from "./components/shared/header";
+import Footer from "./components/shared/footer";
+import AppRoutes from "./components/shared/approutes";
 import { Outlet } from "react-router";
 
 import "./App.css";
