@@ -11,7 +11,7 @@ function favReducer(state, action) {
     case "remove":
       return state.filter((fav) => fav.id !== action.id);
 
-    case "set": // 🔹 new action to replace entire state when user changes
+    case "set":
       return action.favourites || [];
 
     default:

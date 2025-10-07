@@ -46,7 +46,7 @@ export default function Header() {
 				{/* Brand */}
 				<div className="flex items-center space-x-2">
 					<img
-						src="/src/assets/brand icon.png"
+						src="/src/assets/brand_icon.png"
 						alt="ShowFlix Logo"
 						className="h-8 w-8 md:h-10 md:w-10 object-contain"
 					/>

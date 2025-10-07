@@ -13,8 +13,8 @@ export default function AppRoutes() {
 	return (
 		<>
 			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/home" element={<Navigate to="/" />} />
+				<Route path="/home" element={<Home />} />
+				<Route path="/" element={<Navigate to="/home" />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/about" element={<About />} />
 				<Route path="/search" element={<SearchPage />} />

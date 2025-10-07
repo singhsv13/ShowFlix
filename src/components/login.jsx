@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import users from "../data/users.json";
 import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -85,12 +85,12 @@ export default function Login() {
         <div className="mt-8 text-center text-sm text-gray-300">
           <p>
             Don’t have an account?{" "}
-            <a
-              href="#"
+            <Link
+              to=""
               className="bg-gradient-to-r from-red-500 to-pink-500 text-transparent bg-clip-text font-medium hover:underline transition-colors flex items-center justify-center gap-1"
             >
               <i className="fas fa-user-plus"></i> Sign Up
-            </a>
+            </Link>
           </p>
         </div>
       </div>

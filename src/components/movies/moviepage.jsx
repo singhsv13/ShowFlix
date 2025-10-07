@@ -11,11 +11,11 @@ import { useLoader } from "../../hooks/useLoader";
 export default function MoviesPage() {
 	const [movies, setMovies] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
-	const moviesPerPage = 12;
-	const loading = useLoader(movies);
-
-	const { favourites, addFavourite } = useFavourites();
 	const { user } = useContext(AuthContext);
+	const { favourites, addFavourite } = useFavourites();
+	const loading = useLoader(movies);
+	const moviesPerPage = 12;
+
 
 	// initial loading of data in the component
 	useEffect(() => {
